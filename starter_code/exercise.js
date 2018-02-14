@@ -1,11 +1,10 @@
 /*
 Problem Set 1 PacMan  - Bounce off Walls 
 1)	Bounce off Walls -  Given the code below and the 4 images  
-PacMan1.png etc make the PacMan bounce off the boundary at x=600px 
+PacMan1.png etc make the PacMan bounce off the boundary at x=800px
 so that it reverses its direction of motion and uses the last 2 images.
 Then make it bounce off the boundary at x = 0px.  
 You will need to take into account the size of the image.
-
 */
 var exercise = {};
 exercise.flag = 0; // 0 = mouth open  1 = mouth shut
@@ -17,15 +16,12 @@ exercise.run = function() {
     exercise.chooseImage();
 };
 exercise.updatePosition = function() {
-    // increment exercise.pos.x by increment 
-    // now set image position using img1.style.left 
+    // increment exercise.pos.x by increment
+    // now set image position using img1.style.left
     // remember images positions are "xxx.px"
-
-    exercise.pos.x = exercise.pos.x + exercise.increment;
+    exercise.pos.x = exercise.increment + exercise.pos.x;
     console.log( exercise.pos.x + exercise.increment);
-    exercise.img1.style.left = exercise.pos.x;
-
-
+    exercise.img1.style.left = exercise.pos.x + 'px';
 };
 exercise.chooseImage = function() {
     // choose between all 4 images
@@ -50,15 +46,12 @@ exercise.chooseImage = function() {
 exercise.checkWallCollision = function() {
     // reset the direction of motion if wall is hit
     // you need to take into account image width
-    if (exercise.pos.x > 800 - 40){
-        exercise.increment = -20;
+    exercise.doubleIncrement = 2* exercise.increment;
+    if (exercise.pos.x >= 800) {
+        exercise.increment -= exercise.doubleIncrement;
     }
-
-    if (exercise.pos.x < 0 + 40){
-        exercise.increment = 20;
+    if (exercise.pos.x <0 - exercise.increment) {
+        exercise.increment -= exercise.doubleIncrement;
     }
-    // else {
-    //     exercise.increment = 20;
-    // }
 
 };
